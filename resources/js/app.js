@@ -20,7 +20,11 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('note-list', require('./components/NoteListComponent.vue').default);
+Vue.component('note-content', require('./components/NoteContentComponent.vue').default);
+Vue.component('new-note', require('./components/NewNoteComponent.vue').default);
+Vue.component('adv-notes', require('./components/AdvNotesComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,3 +35,4 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
+

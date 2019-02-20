@@ -37,7 +37,7 @@
     </nav>
     <div class="row mb-5">
         <div class="col-md-6">
-            <new-note></new-note>
+            <new-note v-on:ListUpdate="updateNotelList($event)"></new-note>
         </div>
         <div class="col-md-6">
             <p>right column</p>
@@ -69,6 +69,9 @@ export default {
     methods: {
         openNote(note) {
             this.note = note;
+        },
+        updateNotelList(note) {
+            this.notes.unshift(note);
         }
     }
 }

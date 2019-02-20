@@ -1835,6 +1835,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     openNote: function openNote(note) {
       this.note = note;
+    },
+    updateNotelList: function updateNotelList(note) {
+      this.notes.unshift(note);
     }
   }
 });
@@ -1862,8 +1865,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "NewNote",
+  data: function data() {
+    return {
+      note: {
+        title: '',
+        description: ''
+      },
+      blankNote: {
+        title: '',
+        description: ''
+      }
+    };
+  },
   methods: {
-    addNewNoteForm: function addNewNoteForm() {}
+    addNewNote: function addNewNote() {
+      var _this = this;
+
+      var self = this;
+      axios.post('/api/notes', this.note).then(function (response) {
+        self.$emit("ListUpdate", response.data);
+        _this.note = _this.blankNote;
+      }).catch(function (error) {
+        console.log("we have a problem", error);
+      });
+    }
   }
 });
 
@@ -36969,7 +36995,20 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row mb-5" }, [
-      _c("div", { staticClass: "col-md-6" }, [_c("new-note")], 1),
+      _c(
+        "div",
+        { staticClass: "col-md-6" },
+        [
+          _c("new-note", {
+            on: {
+              ListUpdate: function($event) {
+                return _vm.updateNotelList($event)
+              }
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm._m(1)
     ]),
@@ -37172,9 +37211,61 @@ var render = function() {
       }
     },
     [
-      _vm._m(0),
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.note.title,
+              expression: "note.title"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "noteTitleInput",
+            "aria-describedby": "textHelp",
+            placeholder: "Enter note title"
+          },
+          domProps: { value: _vm.note.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.note, "title", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "form-group" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.note.description,
+              expression: "note.description"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            name: "noteDescriptionInput",
+            placeholder: "Enter note description"
+          },
+          domProps: { value: _vm.note.description },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.note, "description", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -37187,38 +37278,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "email",
-          id: "noteTitleInput",
-          "aria-describedby": "emailHelp",
-          placeholder: "Enter note title"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: {
-          id: "noteDescriptionInput",
-          placeholder: "Enter note description"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

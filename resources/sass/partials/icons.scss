@@ -1,0 +1,27 @@
+// Variables
+@import 'variables';
+
+.oi-trash {
+    &:hover {
+        color: $red;
+    }
+} 
+
+.oi-pencil {
+    &:hover {
+        color: $green;
+    }
+} 
+
+.icons {
+    display: block;
+    float: right;
+    .oi {
+       & + .oi {
+            margin-left: 10px;
+        }
+    } 
+    .oi-trash {
+        margin-top: 3px;
+    }
+}

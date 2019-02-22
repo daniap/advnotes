@@ -6,11 +6,9 @@ export default {
     props:['note'],
     methods:{
         removeItem(){
-            console.log("is remove", this.note);
             var path = '/api/notes/' + this.note.id;
             axios.delete(path).then(
                 (response) => {
-                    console.log("note deleted", response)
                     this.removeFromList();
                 }                    
             ).catch(
@@ -20,7 +18,6 @@ export default {
             )
         },
         removeFromList() {
-            console.log("is removeFromList", this.note);
             this.$emit('removeFromList', this.note);
         }
     }

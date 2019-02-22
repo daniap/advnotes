@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "open-iconic": "^1.1.1",
+        "prism-languages": "^0.4.0",
         "prismjs": "^1.15.0"
     }
 }

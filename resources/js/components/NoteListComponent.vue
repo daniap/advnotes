@@ -32,9 +32,7 @@ export default {
         },
         updateList(note) {
             () => {
-            console.log("is update list");
             this.notes = this.removeFromList(note);
-            console.log("this.notes - ", this.notes)
             }
         }
     }

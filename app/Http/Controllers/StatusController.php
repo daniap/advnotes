@@ -83,7 +83,9 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
+        $status = Status::findOrFail($id);
         $status->delete();
+        
         return response()->json($status, 200);
     }
 }
